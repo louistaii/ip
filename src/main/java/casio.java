@@ -36,9 +36,9 @@ public class casio{
                         task_array[i].description +
                         " " + task_array[i].date;
                 System.out.println(output);
-                System.out.println("Now you have "+ task_number +" tasks in the list.");
             }
         }
+        System.out.println("Now you have "+ task_number +" tasks in the list.");
     }
 
 

@@ -16,13 +16,13 @@ public class Task
         return (isDone ? "X" : " "); // mark done task with X
     }
     public String getTypeIcon() {
-        if (type == "todo"){
+        if (type.equals("todo")){
             return "T";
         }
-        if (type == "event"){
+        if (type.equals("event")){
             return "E";
         }
-        if (type == "deadline"){
+        if (type.equals("deadline")){
             return "D";
         }
         return " ";
