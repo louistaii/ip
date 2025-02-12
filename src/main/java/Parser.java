@@ -1,6 +1,8 @@
 public class Parser {
 
+
     public static int parseInput(String input, int taskNumber, Task[] taskArray) throws CasioException{
+
 
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
@@ -22,6 +24,7 @@ public class Parser {
 
         case "mark":
             taskIndex = Integer.parseInt(taskName);
+
             taskIndex--;
             if (taskIndex <0 || taskIndex >= taskNumber){
                 CasioException.invalidIndex(taskIndex);
@@ -65,6 +68,7 @@ public class Parser {
             }
 
             String deadlineDetails = deadlineParts[1].trim();
+
             Casio.addDeadline(deadlineName, deadlineDetails);
             taskNumber++;
             System.out.println("Now you have " + taskNumber + " tasks in the list.");

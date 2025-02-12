@@ -6,6 +6,8 @@ public class Casio{
     private static int taskNumber = 0;
     private static Task[] taskArray =  new Task[MAX_SIZE];
 
+
+
     public static void addTodo(String name){
         Todo t = new Todo(name);
         taskArray[taskNumber] = t;
@@ -23,6 +25,7 @@ public class Casio{
         taskArray[taskNumber] = t;
         System.out.println("added deadline: "+ name);
     }
+
 
     public static void markTask(int index){
         taskArray[index].isDone = true;
