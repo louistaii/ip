@@ -6,11 +6,7 @@ public class Casio{
     private static int taskNumber = 0;
     private static Task[] taskArray =  new Task[MAX_SIZE];
 
-    public static void addTask(Task[] taskArray, String name){
-        Task t = new Task(name);
-        taskArray[taskNumber] = t;
-        System.out.println("added task: "+ name);
-    }
+
 
     public static void addTodo(String name){
         Todo t = new Todo(name);
@@ -32,24 +28,16 @@ public class Casio{
 
 
     public static void markTask(int index){
-        if (index >= 0 && index < taskNumber) {
-            taskArray[index].isDone = true;
-            System.out.println(taskArray[index].description + " marked as done.");
-        } else {
-            System.out.println("Invalid task index.");
-        }
+        taskArray[index].isDone = true;
+        System.out.println(taskArray[index].description + " marked as done.");
     }
 
     public static void unmarkTask(int index){
-        if (index >= 0 && index < taskNumber) {
-            taskArray[index].isDone = false;
-            System.out.println(taskArray[index].description + " marked as undone.");
-        } else {
-            System.out.println("Invalid task index.");
-        }
+        taskArray[index].isDone = false;
+        System.out.println(taskArray[index].description + " marked as undone.");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CasioException{
         UI.greeting();
         Scanner scanner = new Scanner(System.in);
 
@@ -58,7 +46,6 @@ public class Casio{
             String input = scanner.nextLine();
             taskNumber = Parser.parseInput(input, taskNumber, taskArray);
         }
-
     }
 
 }
