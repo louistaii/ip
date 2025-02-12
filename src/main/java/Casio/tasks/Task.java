@@ -1,3 +1,5 @@
+package Casio.tasks;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -9,6 +11,18 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public boolean getDone() {
+        return isDone;
     }
 
     public String getTypeIcon() {

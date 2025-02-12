@@ -1,3 +1,13 @@
+package Casio;
+
+import Casio.parser.Parser;
+import Casio.ui.UI;
+import Casio.exceptions.CasioException;
+import Casio.tasks.Deadline;
+import Casio.tasks.Event;
+import Casio.tasks.Task;
+import Casio.tasks.Todo;
+
 import java.util.Scanner;
 
 public class Casio{
@@ -28,16 +38,18 @@ public class Casio{
 
 
     public static void markTask(int index){
-        taskArray[index].isDone = true;
-        System.out.println(taskArray[index].description + " marked as done.");
+        taskArray[index].setDone(true);
+        String taskDescription = taskArray[index].getDescription();
+        System.out.println(taskDescription + " marked as done.");
     }
 
     public static void unmarkTask(int index){
-        taskArray[index].isDone = false;
-        System.out.println(taskArray[index].description + " marked as undone.");
+        taskArray[index].setDone(false);
+        String taskDescription = taskArray[index].getDescription();
+        System.out.println(taskDescription + " marked as undone.");
     }
 
-    public static void main(String[] args) throws CasioException{
+    public static void main(String[] args) throws CasioException {
         UI.greeting();
         Scanner scanner = new Scanner(System.in);
 

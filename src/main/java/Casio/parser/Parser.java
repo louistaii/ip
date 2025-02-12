@@ -1,7 +1,14 @@
+package Casio.parser;
+
+import Casio.Casio;
+import Casio.ui.UI;
+import Casio.exceptions.CasioException;
+import Casio.tasks.Task;
+
 public class Parser {
 
 
-    public static int parseInput(String input, int taskNumber, Task[] taskArray) throws CasioException{
+    public static int parseInput(String input, int taskNumber, Task[] taskArray) throws CasioException {
 
 
         String[] splitInput = input.split(" ", 2);
@@ -27,9 +34,9 @@ public class Parser {
 
             taskIndex--;
             if (taskIndex <0 || taskIndex >= taskNumber){
-                CasioException.invalidIndex(taskIndex);
+                CasioException.invalidIndex(taskIndex, taskNumber);
             }
-            if (taskArray[taskIndex].isDone == true){
+            if (taskArray[taskIndex].getDone() == true){
                 throw new CasioException("OOPS! Tried to mark a marked task!");
             }
             Casio.markTask(taskIndex);
@@ -39,9 +46,9 @@ public class Parser {
             taskIndex = Integer.parseInt(taskName);
             taskIndex--;
             if (taskIndex <0 || taskIndex >= taskNumber){
-                CasioException.invalidIndex(taskIndex);
+                CasioException.invalidIndex(taskIndex, taskNumber);
             }
-            if (taskArray[taskIndex].isDone == false){
+            if (taskArray[taskIndex].getDone() == false){
                 throw new CasioException("OOPS! Tried to unmark an unmarked task!");
             }
             Casio.unmarkTask(taskIndex);

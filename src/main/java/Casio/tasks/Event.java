@@ -1,3 +1,5 @@
+package Casio.tasks;
+
 public class Event extends Task {
     protected String from ="";
     protected String to = "";
@@ -15,6 +17,6 @@ public class Event extends Task {
 
     @Override
     public String toString(){
-        return (" " + description + " (from: " + from + " to:" + to + ")");
+        return (" " + description + " (from: " + from + "to:" + to + ")");
     }
 }
