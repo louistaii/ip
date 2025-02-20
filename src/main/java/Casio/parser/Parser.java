@@ -5,10 +5,12 @@ import Casio.ui.UI;
 import Casio.exceptions.CasioException;
 import Casio.tasks.Task;
 
+import java.util.ArrayList;
+
 public class Parser {
 
 
-    public static int parseInput(String input, int taskNumber, Task[] taskArray) throws CasioException {
+    public static int parseInput(String input, int taskNumber, ArrayList<Task> taskArray) throws CasioException {
 
 
         String[] splitInput = input.split(" ", 2);
@@ -26,7 +28,7 @@ public class Parser {
             UI.exit();
             break;
         case "list":
-            UI.printTasks(taskNumber, taskArray);
+            UI.printTasks(taskArray);
             break;
 
         case "mark":
@@ -36,7 +38,7 @@ public class Parser {
             if (taskIndex <0 || taskIndex >= taskNumber){
                 CasioException.invalidIndex(taskIndex, taskNumber);
             }
-            if (taskArray[taskIndex].getDone() == true){
+            if (taskArray.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to mark a marked task!");
             }
             Casio.markTask(taskIndex);
@@ -48,14 +50,14 @@ public class Parser {
             if (taskIndex <0 || taskIndex >= taskNumber){
                 CasioException.invalidIndex(taskIndex, taskNumber);
             }
-            if (taskArray[taskIndex].getDone() == false){
+            if (!taskArray.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to unmark an unmarked task!");
             }
             Casio.unmarkTask(taskIndex);
             break;
 
         case "todo":
-            if (taskName.equals("")){
+            if (taskName.isEmpty()){
                 CasioException.missingTaskName("todo");
             }
             Casio.addTodo(taskName);
@@ -64,7 +66,7 @@ public class Parser {
             break;
 
         case "deadline":
-            if (taskName.equals("")){
+            if (taskName.isEmpty()){
                 CasioException.missingTaskName("deadline");
             }
             String[] deadlineParts = taskName.split("/by");
@@ -82,12 +84,12 @@ public class Parser {
             break;
 
         case "event":
-            if (taskName.equals("")){
+            if (taskName.isEmpty()){
                 CasioException.missingTaskName("event");
             }
             String[] eventParts = taskName.split("/from");
             String eventName = eventParts[0].trim();
-            String eventDetails = "";
+            String eventDetails;
 
             if (eventParts.length <= 1) {
                 CasioException.missingDetails("from", eventName);
@@ -104,11 +106,20 @@ public class Parser {
             }
             break;
 
+        case "delete":
+            taskIndex = Integer.parseInt(taskName);
+            taskIndex--;
+            if (taskIndex <0 || taskIndex >= taskNumber){
+                CasioException.invalidIndex(taskIndex, taskNumber);
+            }
+            Casio.deleteTask(taskIndex);
+            break;
+
+
         default:
-            throw new CasioException("Invalid task type: " + taskType);
+            throw new CasioException("Invalid command: " + taskType);
         }
         return taskNumber;
     }
-
 
 }
