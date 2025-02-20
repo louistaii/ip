@@ -62,7 +62,7 @@ public class Parser {
             }
             Casio.addTodo(taskName);
             taskNumber++;
-            System.out.println("Now you have " + taskNumber + " tasks in the list.");
+            System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             break;
 
         case "deadline":
@@ -80,7 +80,7 @@ public class Parser {
 
             Casio.addDeadline(deadlineName, deadlineDetails);
             taskNumber++;
-            System.out.println("Now you have " + taskNumber + " tasks in the list.");
+            System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             break;
 
         case "event":
@@ -100,7 +100,7 @@ public class Parser {
                 String[] timeParts = eventDetails.split("/to");
                 Casio.addEvent(eventName, timeParts[0], timeParts[1]);
                 taskNumber++;
-                System.out.println("Now you have " + taskNumber + " tasks in the list.");
+                System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             } else {
                 CasioException.missingDetails("to", eventName);
             }
