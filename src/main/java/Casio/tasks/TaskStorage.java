@@ -28,14 +28,12 @@ public class TaskStorage {
                     continue; // skip invalid lines instead of throwing an error
                 }
 
-
                 String taskType = details[0];
                 String taskStatus = details[1];
                 String taskName = details[2];
                 String taskDetails = details[3];
                 String from = details[4];
                 String to = details[5];
-
 
                 Task T = null;
                 switch (taskType) {
@@ -60,18 +58,15 @@ public class TaskStorage {
                 if (T != null) {
                     taskArray.add(T);
                 }
-
-
             }
         }
+
         catch (FileNotFoundException e) {
             System.out.println("File not found at: " + FILE_PATH);
         }
 
         return taskArray;
     }
-
-
 
     private static String[] getDetails(String output) {
         String[] parts = output.split(" \\| ");
@@ -114,7 +109,7 @@ public class TaskStorage {
         return taskType + " | " + taskStatus +" | "+ taskName + taskDetails;
     }
 
-    public static void saveFile(ArrayList<Task> taskArray) {
+    public static void overwriteSaveFile(ArrayList<Task> taskArray) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             for (Task task : taskArray) {
                 writer.write(formatString(task) + "\n");
@@ -124,7 +119,7 @@ public class TaskStorage {
         }
     }
 
-    public static void appendFile(Task task) {
+    public static void appendTaskToFile(Task task) {
         try(FileWriter writer = new FileWriter(FILE_PATH, true)) { // create a FileWriter in append mode
             writer.write(formatString(task)+ "\n");
         } catch (IOException e) {

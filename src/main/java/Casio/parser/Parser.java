@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public class Parser {
 
 
-    public static int parseInput(String input, int taskNumber, ArrayList<Task> taskArray) throws CasioException {
-
+    public static boolean parseInput(String input, int taskNumber, ArrayList<Task> taskArray) throws CasioException {
 
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
@@ -24,9 +23,11 @@ public class Parser {
         int taskIndex;
 
         switch (taskType) {
+
         case "bye":
             UI.exit();
-            break;
+            return true;
+
         case "list":
             UI.printTasks(taskArray);
             break;
@@ -61,8 +62,6 @@ public class Parser {
                 CasioException.missingTaskName("todo");
             }
             Casio.addTodo(taskName);
-            taskNumber++;
-            System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             break;
 
         case "deadline":
@@ -72,15 +71,13 @@ public class Parser {
             String[] deadlineParts = taskName.split("/by");
             String deadlineName = deadlineParts[0].trim();
 
-            if (deadlineParts.length <= 1) {
-                CasioException.missingDetails("by", deadlineName);
+            if (deadlineParts.length == 1) {
+                CasioException.missingDeadlineBy(deadlineName);
             }
 
             String deadlineDetails = deadlineParts[1].trim();
 
             Casio.addDeadline(deadlineName, deadlineDetails);
-            taskNumber++;
-            System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             break;
 
         case "event":
@@ -91,22 +88,24 @@ public class Parser {
             String eventName = eventParts[0].trim();
             String eventDetails;
 
-            if (eventParts.length <= 1) {
-                CasioException.missingDetails("from", eventName);
+            if (eventParts.length == 1) {
+                CasioException.missingEventFrom(eventName);
             }
             eventDetails = eventParts[1].trim();
 
             if (eventDetails.contains("/to")) {
                 String[] timeParts = eventDetails.split("/to");
                 Casio.addEvent(eventName, timeParts[0], timeParts[1]);
-                taskNumber++;
-                System.out.println("Now you have " + taskNumber + " task(s) in the list.");
             } else {
-                CasioException.missingDetails("to", eventName);
+                CasioException.missingEventTo(eventName);
             }
             break;
 
         case "delete":
+            if (taskName.isEmpty()){
+                CasioException.missingTaskName("deadline");
+            }
+
             taskIndex = Integer.parseInt(taskName);
             taskIndex--;
             if (taskIndex <0 || taskIndex >= taskNumber){
@@ -115,11 +114,10 @@ public class Parser {
             Casio.deleteTask(taskIndex);
             break;
 
-
         default:
-            throw new CasioException("Invalid command: " + taskType);
+            CasioException.invalidCommand(taskType);
         }
-        return taskNumber;
-    }
 
+        return false;
+    }
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class UI {
 
-
     public static void greeting(){
         String greeting = "____________________________________________________________"
                 + "\nHello! I'm Casio\n"
@@ -21,20 +20,23 @@ public class UI {
         System.out.println(bye);
     }
 
+    public static void printTaskNumber(int taskNumber){
+        System.out.println("You now have " + taskNumber + " task(s) in the list.");
+    }
 
     public static void printTasks(ArrayList<Task> taskArray) {
         for (int i = 0; i < taskArray.size(); i++) {
-            if (taskArray.get(i)!=null) {
+            if (taskArray.get(i) != null) {
                 String status_icon = taskArray.get(i).getStatusIcon();
                 String type_icon = taskArray.get(i).getTypeIcon();
-                int index = i+1;
+                int index = i + 1;
                 String output = index + ". " +
                         type_icon +
                         status_icon;
                 System.out.println(output + taskArray.get(i));
             }
         }
-        System.out.println("You have "+ taskArray.size() +" task(s).");
+        System.out.println("You have " + taskArray.size() + " task(s).");
     }
 
 }

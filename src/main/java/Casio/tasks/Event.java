@@ -11,12 +11,10 @@ public class Event extends Task {
     }
 
     public String getFrom() {
-
         return this.from;
     }
 
     public String getTo() {
-
         return this.to;
     }
 
