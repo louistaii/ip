@@ -25,10 +25,12 @@ public class Parser {
         switch (taskType) {
 
         case "bye":
+            UI.printOutputUI();
             UI.exit();
             return true;
 
         case "list":
+            UI.printOutputUI();
             UI.printTasks(taskArray);
             break;
 
@@ -42,6 +44,7 @@ public class Parser {
             if (taskArray.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to mark a marked task!");
             }
+            UI.printOutputUI();
             Casio.markTask(taskIndex);
             break;
 
@@ -54,6 +57,7 @@ public class Parser {
             if (!taskArray.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to unmark an unmarked task!");
             }
+            UI.printOutputUI();
             Casio.unmarkTask(taskIndex);
             break;
 
@@ -61,6 +65,7 @@ public class Parser {
             if (taskName.isEmpty()){
                 CasioException.missingTaskName("todo");
             }
+            UI.printOutputUI();
             Casio.addTodo(taskName);
             break;
 
@@ -77,6 +82,7 @@ public class Parser {
 
             String deadlineDetails = deadlineParts[1].trim();
 
+            UI.printOutputUI();
             Casio.addDeadline(deadlineName, deadlineDetails);
             break;
 
@@ -94,6 +100,7 @@ public class Parser {
             eventDetails = eventParts[1].trim();
 
             if (eventDetails.contains("/to")) {
+                UI.printOutputUI();
                 String[] timeParts = eventDetails.split("/to");
                 Casio.addEvent(eventName, timeParts[0], timeParts[1]);
             } else {
@@ -111,13 +118,13 @@ public class Parser {
             if (taskIndex <0 || taskIndex >= taskNumber){
                 CasioException.invalidIndex(taskIndex, taskNumber);
             }
+            UI.printOutputUI();
             Casio.deleteTask(taskIndex);
             break;
 
         default:
             CasioException.invalidCommand(taskType);
         }
-
         return false;
     }
 }

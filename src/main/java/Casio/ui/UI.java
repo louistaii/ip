@@ -5,23 +5,42 @@ import Casio.tasks.Task;
 import java.util.ArrayList;
 
 public class UI {
+    public static final String RESET = "\u001B[0m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String BOLD = "\u001B[1m";
 
     public static void greeting(){
-        String greeting = "____________________________________________________________"
-                + "\nHello! I'm Casio\n"
-                + "What can I do for you?\n";
+        System.out.println(CYAN
+                + "\n   ██████╗  █████╗ ███████╗██╗ ██████╗  "
+                + "\n  ██╔════╝ ██╔══██╗██╔════╝██║██╔═══██╗ "
+                + "\n  ██║      ███████║███████╗██║██║   ██║ "
+                + "\n  ██║      ██╔══██║╚════██║██║██║   ██║ "
+                + "\n  ╚██████╗ ██║  ██║███████║██║╚██████╔╝ "
+                + "\n   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝  "
+                + "\n★彡★彡★彡★彡★彡★彡★彡★★彡★彡★彡★彡★彡★彡★"
+                + RESET );
+
+        String greeting = "Hello!! I'm Casio, your personal chat bot. ⊂(◉‿◉)つ"
+                + "\nWhat can I do for you?\n";
+        printOutputUI();
         System.out.println(greeting);
     }
 
+    public static void printOutputUI(){
+        System.out.println(CYAN + BOLD +"\nCasio:" + RESET);
+    }
+
+    public static void printInputUI(){
+        System.out.println(GREEN + BOLD + "You:" + RESET);
+    }
+
     public static void exit(){
-        String bye = "____________________________________________________________"
-                + "\nBye. Hope to see you again soon!\n\n"
-                +"____________________________________________________________";
-        System.out.println(bye);
+        System.out.println("Bye bye! Hope to see you again soon! ( ╥﹏╥) ノシ");
     }
 
     public static void printTaskNumber(int taskNumber){
-        System.out.println("You now have " + taskNumber + " task(s) in the list.");
+        System.out.println("You now have " + taskNumber + " task(s) in the list.\n");
     }
 
     public static void printTasks(ArrayList<Task> taskArray) {
@@ -36,7 +55,7 @@ public class UI {
                 System.out.println(output + taskArray.get(i));
             }
         }
-        System.out.println("You have " + taskArray.size() + " task(s).");
+        System.out.println("You have " + taskArray.size() + " task(s).\n");
     }
 
 }

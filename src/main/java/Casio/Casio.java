@@ -49,7 +49,7 @@ public class Casio{
         TaskStorage.overwriteSaveFile(taskArray);
 
         String taskDescription = taskArray.get(index).getDescription();
-        System.out.println(taskDescription + " marked as done.");
+        System.out.println(taskDescription + " marked as done. Good job!!");
         UI.printTaskNumber(taskArray.size());
     }
 
@@ -85,6 +85,7 @@ public class Casio{
         //loop to get inputs
         while (!hasQuit) {
             taskNumber = taskArray.size();
+            UI.printInputUI();
             String input = scanner.nextLine();
             hasQuit = Parser.parseInput(input, taskNumber, taskArray);
         }

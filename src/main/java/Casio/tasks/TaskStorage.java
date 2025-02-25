@@ -51,7 +51,7 @@ public class TaskStorage {
                     continue;
                 }
 
-                if (taskStatus.equals("[X]")) {
+                if (taskStatus.equals("[✔]")) {
                     T.setDone(true);
                 }
 
