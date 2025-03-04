@@ -1,6 +1,7 @@
 package Casio.ui;
 
 import Casio.tasks.Task;
+import Casio.tasks.TaskList;
 
 import java.util.ArrayList;
 
@@ -43,19 +44,44 @@ public class UI {
         System.out.println("You now have " + taskNumber + " task(s) in the list.\n");
     }
 
-    public static void printTasks(ArrayList<Task> taskArray) {
-        for (int i = 0; i < taskArray.size(); i++) {
-            if (taskArray.get(i) != null) {
-                String status_icon = taskArray.get(i).getStatusIcon();
-                String type_icon = taskArray.get(i).getTypeIcon();
+    public static void printAddedTaskUI(Task task, int taskNumber){
+        String taskType = task.getType();
+        System.out.println("Added " + taskType + ":" + task + " into the list.");
+        printTaskNumber(taskNumber);
+    }
+
+    public static void printMarkedTaskUI(Task task){
+        String taskDescription = task.getDescription();
+        System.out.println(taskDescription + " marked as done. Good job!!\n");
+    }
+
+    public static void printUnmarkedTaskUI(Task task){
+        String taskDescription = task.getDescription();
+        System.out.println(taskDescription + " marked as undone.\n");
+    }
+
+    public static void printDeleteTaskUI(Task task, int index){
+        String status_icon = task.getStatusIcon();
+        String type_icon = task.getTypeIcon();
+        String output = (index+1) + ". " +
+                type_icon +
+                status_icon;
+        System.out.println("Deleted " + output + task);
+    }
+
+    public static void printTasks(TaskList taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i) != null) {
+                String status_icon = taskList.get(i).getStatusIcon();
+                String type_icon = taskList.get(i).getTypeIcon();
                 int index = i + 1;
                 String output = index + ". " +
                         type_icon +
                         status_icon;
-                System.out.println(output + taskArray.get(i));
+                System.out.println(output + taskList.get(i));
             }
         }
-        System.out.println("You have " + taskArray.size() + " task(s).\n");
+        System.out.println("You have " + taskList.size() + " task(s).\n");
     }
 
 }

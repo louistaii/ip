@@ -24,7 +24,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String getType() {
+        return "event";
+    }
+
+    @Override
     public String toString(){
         return (" " + description + " (from: " + from + "to:" + to + ")");
     }
+
+
 }

@@ -25,6 +25,10 @@ public class Task {
         return isDone;
     }
 
+    public String getType() {
+        return " ";
+    }
+
     public String getTypeIcon() {
         return "[ ]";
     }

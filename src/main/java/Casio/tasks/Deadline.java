@@ -18,6 +18,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getType() {
+        return "deadline";
+    }
+
+    @Override
     public String toString(){
        return (" " + description + " (by: " + by +")");
     }

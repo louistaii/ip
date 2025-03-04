@@ -9,4 +9,9 @@ public class Todo extends Task {
     public String getTypeIcon() {
         return "[T]";
     }
+
+    @Override
+    public String getType() {
+        return "todo";
+    }
 }
