@@ -40,6 +40,11 @@ public class UI {
         System.out.println("Bye bye! Hope to see you again soon! ( ╥﹏╥) ノシ");
     }
 
+    public static void printSortedByTime(){
+        System.out.println("List is now sorted by date and time!" +
+                "\nEnter 'list' command to see sorted list!\n");
+    }
+
     public static void printTaskNumber(int taskNumber){
         System.out.println("You now have " + taskNumber + " task(s) in the list.\n");
     }

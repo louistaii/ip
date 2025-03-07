@@ -1,7 +1,9 @@
 package Casio.tasks;
-import Casio.exceptions.CasioException;
 import Casio.ui.UI;
+
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 
 public class TaskList {
     private static ArrayList<Task> taskArray;
@@ -18,6 +20,20 @@ public class TaskList {
         return taskArray.get(index);
     }
 
+
+    public static void sortByTime() {
+        taskArray.sort(Comparator.comparing(task -> {
+            if (task instanceof Event eventTask) {
+                return eventTask.getFrom();
+            } else if (task instanceof Deadline deadlineTask) {
+                return deadlineTask.getBy();
+            }
+            return LocalDateTime.MAX;
+        }));
+        TaskStorage.overwriteSaveFile(taskArray);
+        UI.printSortedByTime();
+    }
+
     public static void addTodo(String taskName) {
         Todo task = new Todo(taskName);
         taskArray.add(task);
@@ -25,14 +41,14 @@ public class TaskList {
         UI.printAddedTaskUI(task,taskArray.size());
     }
 
-    public static void addEvent(String name, String from, String to){
+    public static void addEvent(String name, LocalDateTime from, LocalDateTime to){
         Event task = new Event(name, from, to);
         taskArray.add(task);
         TaskStorage.appendTaskToFile(task);
         UI.printAddedTaskUI(task,taskArray.size());
     }
 
-    public static void addDeadline(String name, String by){
+    public static void addDeadline(String name, LocalDateTime by){
         Deadline task = new Deadline(name, by);
         taskArray.add(task);
         TaskStorage.appendTaskToFile(task);
