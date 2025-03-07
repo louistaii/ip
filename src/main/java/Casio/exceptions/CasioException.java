@@ -16,7 +16,6 @@ public class CasioException extends Exception {
                 + " (valid index: 1 to " + taskNumber + ")");
     }
 
-
     public static void emptyList() throws CasioException {
         throw new CasioException("OOPS! Unable to fulfill command because your list is empty!");
     }

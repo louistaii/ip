@@ -3,6 +3,8 @@ package Casio.ui;
 import Casio.tasks.Task;
 import Casio.tasks.TaskList;
 
+import java.util.ArrayList;
+
 public class UI {
     public static final String RESET = "\u001B[0m";
     public static final String CYAN = "\u001B[36m";
@@ -72,6 +74,20 @@ public class UI {
         System.out.println("Deleted " + output + task);
     }
 
+    public static void printSearchResults(ArrayList<Task> searchResults) {
+        System.out.println("You have " + searchResults.size() + " search result(s):");
+        int index = 1;
+        for (Task task : searchResults) {
+            String status_icon = searchResults.get(index-1).getStatusIcon();
+            String type_icon = searchResults.get(index-1).getTypeIcon();
+            System.out.println(index + "."
+                    + type_icon
+                    + status_icon
+                    + task);
+            index++;
+        }
+        System.out.println();
+    }
     public static void printTasks(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) != null) {

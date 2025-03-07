@@ -35,6 +35,17 @@ public class Parser {
             UI.printTasks(taskList);
             break;
 
+        case "find":
+            if (taskList.size()==0) {
+                CasioException.emptyList();
+            }
+            if (taskName.isEmpty()) {
+                CasioException.missingTaskName("find");
+            }
+            UI.printOutputUI();
+            TaskList.findTask(taskName);
+            break;
+
         case "mark":
             taskIndex = Integer.parseInt(taskName);
 

@@ -78,5 +78,15 @@ public class TaskList {
         UI.printTaskNumber(taskArray.size());
     }
 
+    public static void findTask(String taskName) throws CasioException {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : taskArray) {
+            if (task.getDescription().toLowerCase().contains(taskName.toLowerCase())) {
+                searchResults.add(task);
+            }
+        }
+        UI.printSearchResults(searchResults);
+    }
+
 
 }
