@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 
-public class Casio{
+public class Casio {
 
     private static final ArrayList<Task> savedTaskArray = TaskStorage.readFile();
     private static final TaskList taskList = new TaskList(savedTaskArray);
@@ -29,6 +29,7 @@ public class Casio{
             String input = scanner.nextLine();
             hasQuit = CommandParser.parseInput(input, taskNumber, taskList);
 
+        }
     }
-
 }
+
