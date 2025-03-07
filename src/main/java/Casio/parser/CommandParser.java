@@ -6,9 +6,40 @@ import Casio.exceptions.CasioException;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * Parses user input strings to determine the command type
+ * and execute the appropriate action on the task list.
+ */
 public class CommandParser {
 
-
+    /**
+     * Supported commands include:
+     * <ul>
+     *     <li><code>bye</code> - Exit the application</li>
+     *     <li><code>list</code> - Display all tasks</li>
+     *     <li><code>sort /by[method]</code> - Sort tasks by specified method</li>
+     *     <li><code>find [keyword]</code> - Find tasks containing keyword</li>
+     *     <li><code>mark [index]</code> - Mark a task as done</li>
+     *     <li><code>unmark [index]</code> - Mark a task as not done</li>
+     *     <li><code>todo [description]</code> - Add a new todo task</li>
+     *     <li><code>deadline [description] /by[datetime]</code> - Add a deadline task</li>
+     *     <li><code>event [description] /from[datetime] /to[datetime]</code> - Add an event</li>
+     *     <li><code>delete [index]</code> - Delete a task</li>
+     * </ul>
+     * @param input The user's input string to be parsed.
+     * @param taskNumber The current number of tasks in the task list.
+     * @param taskList The list of tasks.
+     * @return <code>true</code> if the application should exit (bye command),
+     *         <code>false</code> for all other commands.
+     * @throws CasioException If there is an error executing the command, such as:
+     *         <ul>
+     *         <li>Invalid command format</li>
+     *         <li>Missing required parameters</li>
+     *         <li>Invalid task index</li>
+     *         <li>Attempting invalid operations (i.e. marking already marked tasks)</li>
+     *         </ul>
+     */
     public static boolean parseInput(String input, int taskNumber, TaskList taskList) throws CasioException {
 
         String[] splitInput = input.split(" ", 2);

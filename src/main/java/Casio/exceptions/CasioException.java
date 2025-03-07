@@ -1,5 +1,9 @@
 package Casio.exceptions;
 
+
+/**
+ * This class provides custom exception handling for the Casio application.
+ */
 public class CasioException extends Exception {
     public CasioException(String message) {
         super(message);

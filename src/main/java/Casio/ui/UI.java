@@ -5,12 +5,20 @@ import Casio.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the user interface and display formatting.
+ */
 public class UI {
+
     public static final String RESET = "\u001B[0m";
     public static final String CYAN = "\u001B[36m";
     public static final String GREEN = "\u001B[32m";
     public static final String BOLD = "\u001B[1m";
 
+
+    /**
+     * Displays the welcome message and ASCII art logo when the application starts.
+     */
     public static void greeting(){
         System.out.println(CYAN
                 + "\n   ██████╗  █████╗ ███████╗██╗ ██████╗  "
