@@ -1,15 +1,23 @@
 package Casio.tasks;
 
-public class Deadline extends Task {
-    protected String by ="";
 
-    public Deadline(String description, String by) {
+import Casio.exceptions.CasioException;
+import Casio.parser.DateTimeParser;
+
+import java.time.LocalDateTime;
+
+public class Deadline extends Task {
+    private final LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
-
-    public String getBy() {
+    public LocalDateTime getBy(){
         return this.by;
+    }
+    public String getBySaveFormat() throws CasioException {
+        return DateTimeParser.saveDateTimeFormat(this.by);
     }
 
     @Override
@@ -24,6 +32,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString(){
-       return (" " + description + " (by: " + by +")");
+
+        try {
+            return (" " + description + " (by: " + DateTimeParser.dateTimeToString(by) +")");
+        } catch (CasioException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

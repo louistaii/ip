@@ -3,8 +3,6 @@ package Casio.ui;
 import Casio.tasks.Task;
 import Casio.tasks.TaskList;
 
-import java.util.ArrayList;
-
 public class UI {
     public static final String RESET = "\u001B[0m";
     public static final String CYAN = "\u001B[36m";
@@ -38,6 +36,11 @@ public class UI {
 
     public static void exit(){
         System.out.println("Bye bye! Hope to see you again soon! ( ╥﹏╥) ノシ");
+    }
+
+    public static void printSortedByTime(){
+        System.out.println("List is now sorted by date and time!" +
+                "\nEnter 'list' command to see sorted list!\n");
     }
 
     public static void printTaskNumber(int taskNumber){

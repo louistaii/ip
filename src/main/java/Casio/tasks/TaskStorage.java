@@ -1,4 +1,7 @@
 package Casio.tasks;
+import Casio.exceptions.CasioException;
+import Casio.parser.DateTimeParser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,6 +9,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
 
 public class TaskStorage {
     private static final String FILE_PATH = "data/casio.txt";
@@ -32,8 +36,8 @@ public class TaskStorage {
                 String taskStatus = details[1];
                 String taskName = details[2];
                 String taskDetails = details[3];
-                String from = details[4];
-                String to = details[5];
+                String fromString = details[4];
+                String toString = details[5];
 
                 Task T = null;
                 switch (taskType) {
@@ -41,9 +45,12 @@ public class TaskStorage {
                     T = new Todo(taskName);
                     break;
                 case "[D]":
-                    T = new Deadline(taskName, taskDetails);
+                    LocalDateTime by = DateTimeParser.parseDateTime(taskDetails);
+                    T = new Deadline(taskName, by);
                     break;
                 case "[E]":
+                    LocalDateTime from = DateTimeParser.parseDateTime(fromString);
+                    LocalDateTime to = DateTimeParser.parseDateTime(toString);
                     T = new Event(taskName, from, to);
                     break;
                 default:
@@ -55,14 +62,14 @@ public class TaskStorage {
                     T.setDone(true);
                 }
 
-                if (T != null) {
-                    taskArray.add(T);
-                }
+                taskArray.add(T);
             }
         }
 
         catch (FileNotFoundException e) {
             System.out.println("File not found at: " + FILE_PATH);
+        } catch (CasioException e) {
+            throw new RuntimeException(e);
         }
 
         return taskArray;
@@ -95,15 +102,15 @@ public class TaskStorage {
         return new String[]{taskType, taskStatus, taskName, taskDetails, from, to};
     }
 
-    public static String formatString(Task task){
+    public static String formatString(Task task) throws CasioException {
         String taskName = task.getDescription();
         String taskType = task.getTypeIcon();
         String taskStatus = task.getStatusIcon();
         String taskDetails = "";
         if (task instanceof Event eventTask) {
-            taskDetails = " | " + eventTask.getFrom() + " | " + eventTask.getTo();
+            taskDetails = " | " + eventTask.getFromSaveFormat() + " | " + eventTask.getToSaveFormat();
         } else if (task instanceof Deadline deadlineTask) {
-            taskDetails = " | " + deadlineTask.getBy();
+            taskDetails = " | " + deadlineTask.getBySaveFormat();
         }
 
         return taskType + " | " + taskStatus +" | "+ taskName + taskDetails;
@@ -114,7 +121,7 @@ public class TaskStorage {
             for (Task task : taskArray) {
                 writer.write(formatString(task) + "\n");
             }
-        } catch (IOException e) {
+        } catch (IOException | CasioException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
@@ -122,7 +129,7 @@ public class TaskStorage {
     public static void appendTaskToFile(Task task) {
         try(FileWriter writer = new FileWriter(FILE_PATH, true)) { // create a FileWriter in append mode
             writer.write(formatString(task)+ "\n");
-        } catch (IOException e) {
+        } catch (IOException | CasioException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
     }

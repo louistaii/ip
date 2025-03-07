@@ -16,6 +16,16 @@ public class CasioException extends Exception {
                 + " (valid index: 1 to " + taskNumber + ")");
     }
 
+
+    public static void emptyList() throws CasioException {
+        throw new CasioException("OOPS! Unable to fulfill command because your list is empty!");
+    }
+
+    public static void missingSortBy() throws CasioException {
+        throw new CasioException("OOPS! Missing details (/by) for sort command: "
+                + "\n(eg. 'sort /by time)'");
+    }
+
     public static void missingDeadlineBy(String name) throws CasioException {
         throw new CasioException("OOPS! Missing details (/by) for: " + name
                 + "\n(eg. '" + name + " /by InsertDeadlineHere)'");
@@ -35,4 +45,9 @@ public class CasioException extends Exception {
         throw new CasioException("OOPS! You must specify a name for " + type + " tasks!"
                 + "\n(eg. '" + type + " InsertNameHere')");
     }
+
+    public static void unrecognizedDateTime() throws CasioException {
+        throw new CasioException("OOPS! Invalid Date Time format. Try: yyyy-mm-dd hh:mm");
+    }
+
 }

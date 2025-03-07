@@ -1,6 +1,6 @@
 package Casio;
 
-import Casio.parser.Parser;
+import Casio.parser.CommandParser;
 import Casio.tasks.Task;
 import Casio.tasks.TaskList;
 import Casio.tasks.TaskStorage;
@@ -27,8 +27,8 @@ public class Casio{
             taskNumber = taskList.size();
             UI.printInputUI();
             String input = scanner.nextLine();
-            hasQuit = Parser.parseInput(input, taskNumber, taskList);
-        }
+            hasQuit = CommandParser.parseInput(input, taskNumber, taskList);
+
     }
 
 }

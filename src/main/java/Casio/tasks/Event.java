@@ -1,21 +1,36 @@
 package Casio.tasks;
 
-public class Event extends Task {
-    protected String from ="";
-    protected String to = "";
+import Casio.exceptions.CasioException;
+import Casio.parser.DateTimeParser;
 
-    public Event(String description, String from, String to) {
+import java.time.LocalDateTime;
+
+public class Event extends Task {
+
+    private final LocalDateTime from;
+    private final LocalDateTime to;
+
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
-    public String getFrom() {
+
+    public LocalDateTime getFrom() {
         return this.from;
     }
 
-    public String getTo() {
-        return this.to;
+    public LocalDateTime getTo()  {
+        return this.from;
+    }
+
+    public String getFromSaveFormat() throws CasioException {
+        return DateTimeParser.saveDateTimeFormat(this.from);
+    }
+
+    public String getToSaveFormat() throws CasioException {
+        return DateTimeParser.saveDateTimeFormat(this.to);
     }
 
     @Override
@@ -30,7 +45,11 @@ public class Event extends Task {
 
     @Override
     public String toString(){
-        return (" " + description + " (from: " + from + "to:" + to + ")");
+        try {
+            return (" " + description + " (from: " + DateTimeParser.dateTimeToString(from) + " to: " + DateTimeParser.dateTimeToString(to) + ")");
+        } catch (CasioException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
