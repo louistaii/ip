@@ -28,7 +28,7 @@ public class Casio{
             UI.printInputUI();
             String input = scanner.nextLine();
             hasQuit = CommandParser.parseInput(input, taskNumber, taskList);
-        }
+
     }
 
 }

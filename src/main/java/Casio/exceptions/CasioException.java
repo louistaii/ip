@@ -16,6 +16,7 @@ public class CasioException extends Exception {
                 + " (valid index: 1 to " + taskNumber + ")");
     }
 
+
     public static void emptyList() throws CasioException {
         throw new CasioException("OOPS! Unable to fulfill command because your list is empty!");
     }
@@ -48,4 +49,5 @@ public class CasioException extends Exception {
     public static void unrecognizedDateTime() throws CasioException {
         throw new CasioException("OOPS! Invalid Date Time format. Try: yyyy-mm-dd hh:mm");
     }
+
 }
