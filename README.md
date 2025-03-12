@@ -1,6 +1,6 @@
-# Duke project template
+# Casio
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Casio is a personal task manager chatbot that helps you add,edit and manage your tasks all in one application! 
 
 ## Setting up in Intellij
 

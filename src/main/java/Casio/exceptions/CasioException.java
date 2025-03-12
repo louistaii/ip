@@ -29,6 +29,11 @@ public class CasioException extends Exception {
                 + "\n(eg. 'sort /by time)'");
     }
 
+    public static void invalidSortMethod(String method) throws CasioException {
+        throw new CasioException("OOPS! " + method + " is not a valid sorting method.\n"
+                + "Try: 'time' or 'name'");
+    }
+
     public static void missingDeadlineBy(String name) throws CasioException {
         throw new CasioException("OOPS! Missing details (/by) for: " + name
                 + "\n(eg. '" + name + " /by InsertDeadlineHere)'");
@@ -42,6 +47,10 @@ public class CasioException extends Exception {
     public static void missingEventTo(String name) throws CasioException {
         throw new CasioException("OOPS! Missing details (/to) for: " + name
                 + "\n(eg. '" + name + " /from InsertEvenStartTimeHere /to InsertEvenEndTimeHere')");
+    }
+
+    public static void eventFromIsAfterTo() throws CasioException {
+        throw new CasioException("OOPS! Your 'from' comes after your 'to' which is not possible (unless you time travel)");
     }
 
     public static void missingTaskName(String type) throws CasioException {

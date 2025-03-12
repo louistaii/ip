@@ -14,6 +14,7 @@ public class UI {
     public static final String CYAN = "\u001B[36m";
     public static final String GREEN = "\u001B[32m";
     public static final String BOLD = "\u001B[1m";
+    public static final String GRAY = "\u001B[90m";
 
 
     /**
@@ -53,6 +54,11 @@ public class UI {
                 "\nEnter 'list' command to see sorted list!\n");
     }
 
+    public static void printSortedByName(){
+        System.out.println("List is now sorted by Name!" +
+                "\nEnter 'list' command to see sorted list!\n");
+    }
+
     public static void printTaskNumber(int taskNumber){
         System.out.println("You now have " + taskNumber + " task(s) in the list.\n");
     }
@@ -82,16 +88,25 @@ public class UI {
         System.out.println("Deleted " + output + task);
     }
 
-    public static void printSearchResults(ArrayList<Task> searchResults) {
+    public static void printSearchResults(ArrayList<Task> searchResults, ArrayList<Task> taskList) {
         System.out.println("You have " + searchResults.size() + " search result(s):");
         int index = 1;
         for (Task task : searchResults) {
             String status_icon = searchResults.get(index-1).getStatusIcon();
             String type_icon = searchResults.get(index-1).getTypeIcon();
-            System.out.println(index + "."
+            int originalListIndex = taskList.indexOf(task) + 1;
+            String output = (index + "."
                     + type_icon
                     + status_icon
-                    + task);
+                    + task
+                    + " (Index on task list: " + originalListIndex + ")");
+
+            if (status_icon.equals("[✔]")) {
+                System.out.println(GRAY + output+ RESET);
+            } else {
+                System.out.println(output);
+            }
+
             index++;
         }
         System.out.println();
@@ -99,14 +114,23 @@ public class UI {
     public static void printTasks(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) != null) {
+
                 String status_icon = taskList.get(i).getStatusIcon();
                 String type_icon = taskList.get(i).getTypeIcon();
                 int index = i + 1;
+
                 String output = index + ". " +
                         type_icon +
                         status_icon;
-                System.out.println(output + taskList.get(i));
+
+                if (status_icon.equals("[✔]")) {
+                    System.out.println(GRAY + output + taskList.get(i) + RESET);
+                } else {
+                    System.out.println(output + taskList.get(i));
+                }
+
             }
+
         }
         System.out.println("You have " + taskList.size() + " task(s).\n");
     }

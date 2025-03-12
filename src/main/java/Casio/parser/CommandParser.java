@@ -42,6 +42,7 @@ public class CommandParser {
      */
     public static boolean parseInput(String input, int taskNumber, TaskList taskList) throws CasioException {
 
+        input = input.toLowerCase().trim();
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
         String taskName = "";
@@ -76,19 +77,26 @@ public class CommandParser {
             }
             String splittingMethod = splittingMethodParts[1].trim();
 
-            if (TaskList.size() == 0){
-                CasioException.emptyList();
-            }
-            if (splittingMethod.equals("time")){
+            testEmptyListError(taskList);
+
+            switch (splittingMethod) {
+            case "time":
                 UI.printOutputUI();
                 TaskList.sortByTime();
+                break;
+            case "name":
+                UI.printOutputUI();
+                TaskList.sortByName();
+                break;
+            default:
+                CasioException.invalidSortMethod(splittingMethod);
             }
-            break;
+
+        break;
 
         case "find":
-            if (taskList.size()==0) {
-                CasioException.emptyList();
-            }
+            testEmptyListError(taskList);
+
             if (taskName.isEmpty()) {
                 CasioException.missingTaskName("find");
             }
@@ -96,13 +104,21 @@ public class CommandParser {
             TaskList.findTask(taskName);
             break;
 
+        case "filter":
+            testEmptyListError(taskList);
+
+            if (taskName.isEmpty()) {
+                CasioException.missingTaskName("filter");
+            }
+            UI.printOutputUI();
+            TaskList.filterTaskType(taskName);
+            break;
+
         case "mark":
             taskIndex = Integer.parseInt(taskName);
-
             taskIndex--;
-            if (taskIndex <0 || taskIndex >= taskNumber){
-                CasioException.invalidIndex(taskIndex, taskNumber);
-            }
+            testValidIndex(taskIndex, taskNumber);
+
             if (taskList.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to mark a marked task!");
             }
@@ -113,9 +129,8 @@ public class CommandParser {
         case "unmark":
             taskIndex = Integer.parseInt(taskName);
             taskIndex--;
-            if (taskIndex <0 || taskIndex >= taskNumber){
-                CasioException.invalidIndex(taskIndex, taskNumber);
-            }
+            testValidIndex(taskIndex, taskNumber);
+
             if (!taskList.get(taskIndex).getDone()){
                 throw new CasioException("OOPS! Tried to unmark an unmarked task!");
             }
@@ -163,11 +178,15 @@ public class CommandParser {
             eventDetails = eventParts[1].trim();
 
             if (eventDetails.contains("/to")) {
-                UI.printOutputUI();
                 String[] timeParts = eventDetails.split("/to");
                 LocalDateTime from = DateTimeParser.parseDateTime(timeParts[0].trim());
                 LocalDateTime to = DateTimeParser.parseDateTime(timeParts[1].trim());
-                TaskList.addEvent(eventName, from, to);
+                if (from.isAfter(to)) {
+                    CasioException.eventFromIsAfterTo();
+                } else {
+                    UI.printOutputUI();
+                    TaskList.addEvent(eventName, from, to);
+                }
             } else {
                 CasioException.missingEventTo(eventName);
             }
@@ -180,9 +199,8 @@ public class CommandParser {
 
             taskIndex = Integer.parseInt(taskName);
             taskIndex--;
-            if (taskIndex <0 || taskIndex >= taskNumber){
-                CasioException.invalidIndex(taskIndex, taskNumber);
-            }
+            testValidIndex(taskIndex, taskNumber);
+
             UI.printOutputUI();
             TaskList.deleteTask(taskIndex);
             break;
@@ -191,5 +209,17 @@ public class CommandParser {
             CasioException.invalidCommand(taskType);
         }
         return false;
+    }
+
+    public static void testEmptyListError(TaskList taskList) throws CasioException {
+        if (TaskList.size() == 0) {
+            CasioException.emptyList();
+        }
+    }
+
+    public static void testValidIndex(int taskIndex, int taskNumber) throws CasioException {
+        if (taskIndex <0 || taskIndex >= taskNumber){
+            CasioException.invalidIndex(taskIndex, taskNumber);
+        }
     }
 }

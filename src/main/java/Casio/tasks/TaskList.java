@@ -1,6 +1,5 @@
 package Casio.tasks;
 import Casio.ui.UI;
-import Casio.exceptions.CasioException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -44,6 +43,12 @@ public class TaskList {
         }));
         TaskStorage.overwriteSaveFile(taskArray);
         UI.printSortedByTime();
+    }
+
+    public static void sortByName(){
+        taskArray.sort(Comparator.comparing(Task::getDescription));
+        TaskStorage.overwriteSaveFile(taskArray);
+        UI.printSortedByName();
     }
 
     /**
@@ -127,7 +132,17 @@ public class TaskList {
                 searchResults.add(task);
             }
         }
-        UI.printSearchResults(searchResults);
+        UI.printSearchResults(searchResults, taskArray);
+    }
+
+    public static void filterTaskType(String taskType) {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : taskArray) {
+            if (taskType.toLowerCase().equals(task.getType())){
+                searchResults.add(task);
+            }
+        }
+        UI.printSearchResults(searchResults, taskArray);
     }
 
 
