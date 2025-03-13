@@ -39,7 +39,7 @@ public class Casio {
 
         //loop to get inputs
         while (!hasQuit) {
-            taskNumber = taskList.size();
+            taskNumber = TaskList.size();
             UI.printInputUI();
             String input = scanner.nextLine();
             hasQuit = CommandParser.parseInput(input, taskNumber, taskList);

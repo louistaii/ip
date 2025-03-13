@@ -1,0 +1,13 @@
+list
+todo test todo
+deadline test deadline /by 12/12/2025 12:00
+event test event /from 11/11/2025 12:00 /to 12/12/2025 15:00
+mark 1
+unmark 1
+find test
+filter todo
+delete 1
+sort /by time
+list
+bye
+
