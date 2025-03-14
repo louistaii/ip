@@ -29,16 +29,17 @@ Make sure you have the following installed:
    In the same dialog, set the **Project language level** field to the `SDK default` option.
 1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
    ```
+   =======================================
     ██████╗  █████╗ ███████╗██╗ ██████╗  
    ██╔════╝ ██╔══██╗██╔════╝██║██╔═══██╗
    ██║      ███████║███████╗██║██║   ██║
    ██║      ██╔══██║╚════██║██║██║   ██║
    ╚██████╗ ██║  ██║███████║██║╚██████╔╝
    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝  
-   ★彡★彡★彡★彡★彡★彡★彡★★彡★彡★彡★彡★彡★彡★
+   =======================================
    
    Casio:
-   Hello!! I'm Casio, your personal chat bot. ⊂(◉‿◉)つ
+   Hello!! I'm Casio, your personal chat bot. (0.0)
    What can I do for you?
    ```
 
