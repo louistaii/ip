@@ -22,16 +22,17 @@ public class UI {
      */
     public static void greeting(){
         System.out.println(CYAN
+                + "\n ======================================="
                 + "\n   ██████╗  █████╗ ███████╗██╗ ██████╗  "
                 + "\n  ██╔════╝ ██╔══██╗██╔════╝██║██╔═══██╗ "
                 + "\n  ██║      ███████║███████╗██║██║   ██║ "
                 + "\n  ██║      ██╔══██║╚════██║██║██║   ██║ "
                 + "\n  ╚██████╗ ██║  ██║███████║██║╚██████╔╝ "
                 + "\n   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝  "
-                + "\n★彡★彡★彡★彡★彡★彡★彡★★彡★彡★彡★彡★彡★彡★"
+                + "\n ======================================="
                 + RESET );
 
-        String greeting = "Hello!! I'm Casio, your personal chat bot. ⊂(◉‿◉)つ"
+        String greeting = "Hello!! I'm Casio, your personal chat bot. (0.0)"
                 + "\nWhat can I do for you?\n";
         printOutputUI();
         System.out.println(greeting);
@@ -46,7 +47,7 @@ public class UI {
     }
 
     public static void exit(){
-        System.out.println("Bye bye! Hope to see you again soon! ( ╥﹏╥) ノシ");
+        System.out.println("Bye bye! Hope to see you again soon! ( ╥.╥)");
     }
 
     public static void printSortedByTime(){
@@ -101,7 +102,7 @@ public class UI {
                     + task
                     + " (Index on task list: " + originalListIndex + ")");
 
-            if (status_icon.equals("[✔]")) {
+            if (status_icon.equals("[X]")) {
                 System.out.println(GRAY + output+ RESET);
             } else {
                 System.out.println(output);
@@ -123,7 +124,7 @@ public class UI {
                         type_icon +
                         status_icon;
 
-                if (status_icon.equals("[✔]")) {
+                if (status_icon.equals("[X]")) {
                     System.out.println(GRAY + output + taskList.get(i) + RESET);
                 } else {
                     System.out.println(output + taskList.get(i));

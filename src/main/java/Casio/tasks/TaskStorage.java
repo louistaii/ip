@@ -79,7 +79,7 @@ public class TaskStorage {
                     continue;
                 }
 
-                if (taskStatus.equals("[✔]")) {
+                if (taskStatus.equals("[X]")) {
                     T.setDone(true);
                 }
 
@@ -107,7 +107,7 @@ public class TaskStorage {
      * @return String array containing parsed task details:
      *<ul>
      * <li>[0] - Task type ("[T]", "[D]", or "[E]")</li>
-     * <li>[1] - Task status ("[✔]" or "[ ]")</li>
+     * <li>[1] - Task status ("[X]" or "[ ]")</li>
      * <li>[2] - Task name</li>
      * <li>[3 - 4] - Task details ( deadline date time (by),  event date time (from, to) )</li>
      * </ul>

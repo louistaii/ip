@@ -11,7 +11,8 @@ public class CasioException extends Exception {
 
     public static void invalidCommand(String command) throws CasioException {
         throw new CasioException("OOPS! " + command + " is not a valid command.\n"
-                + "List of valid commands: 'todo', 'deadline', 'event', 'list', 'bye'");
+                + "List of valid commands: 'todo', 'deadline', 'event',\n"
+                + "'list', 'sort', 'find', 'filter', 'bye'");
     }
 
     public static void invalidIndex(int index, int taskNumber) throws CasioException {

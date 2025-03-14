@@ -13,7 +13,7 @@ List all tasks with their type and status.
 Example of expected output:
 ```
 Casio:
-1. [T][✔] todo1
+1. [T][X] todo1
 2. [D][ ] deadline1 (by: 12 Dec 2024 12:30)
 3. [E][ ] event1 (from: 12 Dec 2024 12:30 to: 12 Dec 2024 12:40)
 You have 3 task(s).
@@ -84,7 +84,7 @@ You now have 0 task(s) in the list.
 
 Mark tasks as complete based off their index on the list (index starts from 1).
 
-Tasks marked as done will be grayed out and have a [✔] beside its name in the list.
+Tasks marked as done will be grayed out and have a [X] beside its name in the list.
 
 Format: `mark task_index`
 
@@ -135,8 +135,8 @@ Expected example output:
 ```
 Casio:
 You have 2 search result(s):
-1.[T][✔] hello (Index on task list: 3)
-1.[D][✔] hello deadline (Index on task list: 5)
+1.[T][X] hello (Index on task list: 3)
+1.[D][X] hello deadline (Index on task list: 5)
 ```
 
 ## 🏻 Filter tasks by type: `filter`
@@ -152,5 +152,5 @@ Expected example output:
 Casio:
 You have 2 search result(s):
 1.[T][ ] hello (Index on task list: 3)
-2.[T][✔] hello2 (Index on task list: 6)
+2.[T][X] hello2 (Index on task list: 6)
 ```
